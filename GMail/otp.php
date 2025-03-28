@@ -5,6 +5,10 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/PHPMailer/src/Exception.php';
 require 'PHPMailer/PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/PHPMailer/src/SMTP.php';
+require 'vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 function mailer_test($username, $password)
 {
@@ -13,12 +17,12 @@ function mailer_test($username, $password)
     try {
         // Server settings
         $mail->isSMTP();
-        $mail->Host = 'mail.biostarhealth.in';
+        $mail->Host = $_ENV['SMTP_HOST'];
         $mail->SMTPAuth = true;
-        $mail->Username = '_mainaccount@biostarhealth.in';
-        $mail->Password = 'a@U;7e39imSWD7';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port = 465;
+        $mail->Username = $_ENV['SMTP_USER'];
+        $mail->Password = $_ENV['SMTP_PASS'];
+        $mail->SMTPSecure = $_ENV['SMTP_SECURE'];
+        $mail->Port = $_ENV['SMTP_PORT'];
     
         // Email settings
         $mail->setFrom('_mainaccount@biostarhealth.in', 'BioStar Health');
