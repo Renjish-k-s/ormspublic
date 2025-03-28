@@ -1,0 +1,2 @@
+[10-Mar-2025 06:34:17 UTC] Database connection error: Access denied for user 'root'@'localhost' (using password: NO)
+[10-Mar-2025 07:32:26 UTC] PHP Warning:  Undefined array key "csrf_token" in /home/biostarh/public_html/orms.biostarhealth.in/login/db/otpsender_emailvalidator.php on line 75

@@ -1,0 +1,5 @@
+[10-Mar-2025 07:31:57 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "php" in /home/biostarh/public_html/orms.biostarhealth.in/User/Partials/header.php:307
+Stack trace:
+#0 /home/biostarh/public_html/orms.biostarhealth.in/User/initial_review/index.php(4): include()
+#1 {main}
+  thrown in /home/biostarh/public_html/orms.biostarhealth.in/User/Partials/header.php on line 307
