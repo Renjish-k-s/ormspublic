@@ -155,7 +155,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"></h6>
                         <a class="collapse-item" href="./scientific_rev/post_member.php">Post a members</a>
-                        <a class="collapse-item" href="">User Control</a>
+                        <a class="collapse-item" href="./scientific_rev/create_comitee.php">User Control</a>
                     </div>
                 </div>
             </li>   
@@ -171,9 +171,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"></h6>
-                        <a class="collapse-item" href="create_comitee.php">Pool creation</a>
-                        <a class="collapse-item" href="active_commitee.php">Commitee Schema</a>
-                        <a class="collapse-item" href="./">User control</a>
+                        <a class="collapse-item" href="./Ethics_rev/post_member.php">Post a members</a>
+                        <a class="collapse-item" href="./Ethics_rev/create_comitee.php">User Control</a>
 
                     </div>
                 </div>

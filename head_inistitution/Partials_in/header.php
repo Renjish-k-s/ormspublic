@@ -1,4 +1,5 @@
-
+<?php require '../../database/config.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -131,7 +132,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="../">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -154,8 +155,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"></h6>
-                        <a class="collapse-item" href="post_reviewer.php">Post a members</a>
-                        <a class="collapse-item" href="user_history.php">User History</a>
+                        <a class="collapse-item" href="./post_member.php">Post a members</a>
+                        <a class="collapse-item" href="./commitee_sheduler.php">User Control</a>
                     </div>
                 </div>
             </li>   
@@ -165,15 +166,15 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Commitee</span>
+                    <span>Ethics Commitee</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Commitee History</h6>
-                        <a class="collapse-item" href="create_comitee.php">Create Commitee</a>
-                        <a class="collapse-item" href="active_commitee.php">Resent Commitee</a>
-                        <a class="collapse-item" href="./">Commitee History</a>
+                        <h6 class="collapse-header">Ethics review</h6>
+                        <a class="collapse-item" href="../Ethics_rev/post_member.php">Post a members</a>
+                        <a class="collapse-item" href="../Ethics_rev/create_comitee.php">User Control</a>
+                        <!-- <a class="collapse-item" href="./">Commitee History</a> -->
 
                     </div>
                 </div>

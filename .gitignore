@@ -1,2 +1,6 @@
 database/config.php
 Gmail/.env
+Gmail/Appoint_person.php
+Gmail/ec_approval.php
+Gmail/otp.php
+
