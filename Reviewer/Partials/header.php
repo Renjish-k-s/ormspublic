@@ -1,3 +1,4 @@
+<?php include '../../database/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,13 +13,13 @@
     <title>Admin Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="./css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     
 
 </head>
@@ -115,6 +116,29 @@ Responsive adjustments for smaller screens
     }
 }
 </style>
+<?php
+$userid = $_SESSION['user_id']; // Get user ID from session
+
+
+// Prepare the SQL statement
+$sql = "SELECT * FROM user_table_global WHERE id = ?";
+$stmt = $con->prepare($sql);
+
+// Bind parameters
+$stmt->bind_param("i", $userid); // "i" indicates an integer
+
+// Execute the query
+$stmt->execute();
+
+// Get the result
+$result = $stmt->get_result();
+
+// Fetch user data
+$user = $result->fetch_assoc(); // Fetch data as an associative array
+
+// Redirect if status is not 1
+// print($user['status']);
+?>
 
 <body id="page-top">
 
@@ -142,23 +166,45 @@ Responsive adjustments for smaller screens
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Proposals
+                Dashboard controller
             </div>
 
+
             <!-- Nav Item - Pages Collapse Menu -->
+ <?php if($user['status']=='1'){ ?>
+
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span></span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Selection</h6>
-                        <a class="collapse-item" href="./proposals/">Proposal Submission</a>
-                    </div>
-                </div>
-            </li>   
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1"
+        aria-expanded="true" aria-controls="collapseTwo1">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Scientific commiteee</span>
+    </a>
+    <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header"></h6>
+            <a class="collapse-item" href="../scientific_review/">Create application</a>
+            <a class="collapse-item" href="" id="">Track application</a>
+        </div>
+    </div>
+</li>
+
+<!-- Ethics Committee Dropdown -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Ethics commiteee</span>
+    </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header"></h6>
+            <a class="collapse-item" href="../initial_review">Create application</a>
+            <a class="collapse-item" href="../track_initial_application.php">Track application</a>
+        </div>
+    </div>
+</li>
+
+<?php }?>
 
        
 
@@ -230,18 +276,18 @@ Responsive adjustments for smaller screens
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Test User</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="./">
+                                <a class="dropdown-item" href="../update_user">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Update Profile
                                 </a>
                                 
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../">
+                                <a class="dropdown-item" href="../../">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -258,7 +304,7 @@ Responsive adjustments for smaller screens
 
 
             <!-- End of Main Content -->
-            <script src="./vendor/jquery/jquery.min.js"></script>
-    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   

@@ -1,4 +1,7 @@
-<?php include '../../database/config.php'; ?>
+<?php 
+session_start();
+
+include '../../database/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +94,7 @@ $waiver_reason = explode(",", $row['waiver_reason']);
         <form action="" method="post">
                 <div class="panel-content text-center">
                    <!-- <input type="text" name="reviewername" id="" placeholder="Enter the revewer name"> -->
-                <textarea class="form-control"  name="review_passage" id="" cols="30" rows="15"></textarea>
+                <textarea class="form-control"  name="review_passage" id="" cols="30" rows="15"><?php echo $_SESSION['user_id'];  ?></textarea>
 
                 <button type="submit" name="submit_review" class="btn btn-primary" style="align:center">Submit review</button>
                 </div>
@@ -160,19 +163,19 @@ if (isset($_POST['submit_review'])) {
     
     $application_id = $_GET['id'] ?? 0; // Get ID from URL and ensure it's a valid integer
     $review = $_POST['review_passage'] ?? ''; // Get review text
-    $status = '0'; // Default status
-
+    $status = 0; // Default status
+    $userid = $_SESSION['user_id'];
     
 
     if (!empty($application_id) && !empty($review)) {
         // Prepare SQL statement
-        $stmt = $con->prepare("INSERT INTO scientific_revew_table (application_id, review, status, time,reviewer_id) VALUES (?, ?, ?, NOW(),?)");
+        $stmt = $con->prepare("INSERT INTO scientific_revew_table (application_id,reviewer_id, review, status, time) VALUES (?,?, ?, ?, NOW())");
         if (!$stmt) {
             die("Prepare failed: " . $con->error);
         }
 
         // Use 'i' for integer parameter type for application_id
-        $stmt->bind_param("isss", $application_id, $review, $status);
+        $stmt->bind_param("isss", $application_id,$userid,$review, $status);
 
         // Execute and check if successful
         if ($stmt->execute()) {

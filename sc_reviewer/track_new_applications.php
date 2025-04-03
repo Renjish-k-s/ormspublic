@@ -61,11 +61,11 @@
                 echo "<td style='padding: 10px;'><a href='./scientific_review_preview/review_panel.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Review panel</a></td>";
                 echo "<td style='padding: 10px;'><a href='./scientific_review_preview/assessment_veiwer.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>View reviews</a></td>";
 
-                if ($status==0) {
-                    echo "<td style='padding: 10px;'>Waiting for approval/td>";
+                if ($status==1) {
+                    echo "<td style='padding: 10px;'>Waiting for approval</td>";
 
                 }
-                elseif($status==1) {
+                elseif($status>1) {
                 {
                 echo "<td style='padding: 10px;'>Approved</td>";
                 }

@@ -255,7 +255,7 @@ select:-moz-focusring {
     <select name="usertype" required>
         <option value="" disabled selected>Select type of user</option>
         <option value="5">Researcher</option>
-        <option value="1">Head of the institution</option>
+        <!-- <option value="1">Head of the institution</option> -->
     </select>
 
     <button type="submit" id="registerBtn" name="register">Sign Up</button>

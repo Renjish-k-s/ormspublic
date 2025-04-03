@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 include '../../database/config.php';
 
 if (!$con) {
@@ -7,15 +10,15 @@ if (!$con) {
 
 // Get application_id from URL
 $application_id = $_GET['id'] ?? '';
-
+$user=$_SESSION['user_id'];
 if (empty($application_id)) {
     die("Application ID is missing.");
 }
 
 // Fetch reviews from the database
-$query = "SELECT * FROM scientific_revew_table WHERE application_id = ?";
+$query = "SELECT * FROM scientific_revew_table WHERE application_id = ? and reviewer_id = ?";
 $stmt = $con->prepare($query);
-$stmt->bind_param("s", $application_id);
+$stmt->bind_param("ss", $application_id,$user);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>

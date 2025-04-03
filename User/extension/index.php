@@ -37,9 +37,14 @@ if (!isset($_SESSION['csrf_token'])) {
             <input type="text" class="form-control" id="appid" placeholder="Enter Application ID*" name="appid" required>
           </div>
           <div class="form-group">
-            <label for="email_idemail_id">Describe the reason for extesion</label>
-            <textarea name="" class="form-control" id="" cols="40" rows="10"></textarea>
+            <label for="fullName">Duration needed</label>
+            <input type="text" class="form-control" id="duration" placeholder="Enter Duration*" name="duration" required>
           </div>
+          <div class="form-group">
+            <label for="email_idemail_id">Describe the reason for extesion</label>
+            <textarea class="form-control" id="" cols="40" rows="10" name="description"></textarea>
+
+            </div>
 
          
 
@@ -70,7 +75,7 @@ $(document).ready(function(){
         submitButton.prop('disabled', true);
         submitButton.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
         $.ajax({
-            url: '', // PHP file to handle upload
+            url: './db/extend.php', // PHP file to handle upload
             type: 'POST',
             data: formdata,
             contentType: false, // Important: Prevent jQuery from setting content type
@@ -84,9 +89,9 @@ $(document).ready(function(){
 
                 if (message === '1') {
 
-                  alertcustom("Member created sucessfully", 1);
+                  alertcustom("Application created Successfully", 1);
                  setTimeout(function() {
-                     window.location.href = "./post_member.php";
+                     window.location.href = "./";
                  }, 3000);
 
                 } else {

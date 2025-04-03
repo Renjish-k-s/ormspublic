@@ -118,7 +118,6 @@ if(isset($_POST['loginbutton']))
                         </script>";
                     exit;
                 case '8':
-
                     echo "<script>
                                 setTimeout(() => {
                                     window.location.href = '../sc_member_secretary/'; // Change 'success.php' to your desired page
@@ -133,14 +132,24 @@ if(isset($_POST['loginbutton']))
                                     }, 500);
                                 </script>";
                     exit;
-                case '3':
+
+                case '4':
 
                         echo "<script>
                                         setTimeout(() => {
                                             window.location.href = '../Reviewer/'; // Change 'success.php' to your desired page
                                         }, 500);
                                     </script>";
-                exit;
+                    exit;
+                    
+                case '2':
+
+                        echo "<script>
+                                        setTimeout(() => {
+                                        window.location.href = '../Chairman/'; // Change 'success.php' to your desired page
+                                                        }, 500);
+                                                    </script>";
+                    exit;
     
 
 

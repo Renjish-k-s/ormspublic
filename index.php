@@ -42,7 +42,7 @@ session_destroy(); // Destroy the session
                         <a class="nav-link" href="./login/">Login or Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#register">Register</a>
+                        <a class="nav-link" href="./login/complaint.php">Register complaint</a>
                     </li>
                 </ul>
             </div>
