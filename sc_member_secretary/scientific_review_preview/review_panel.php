@@ -164,13 +164,17 @@ if (isset($_POST['submit_review'])) {
 
     if (!empty($application_id) && !empty($review)) {
         // Prepare SQL statement
-        $stmt = $con->prepare("INSERT INTO scientific_revew_table (application_id, review, status, time) VALUES (?, ?, ?, NOW())");
+        $stmt = $con->prepare("INSERT INTO scientific_revew_table (application_id, review, status, review_type, time) VALUES (?, ?, ?, 1, NOW())");
+
         if (!$stmt) {
             die("Prepare failed: " . $con->error);
         }
-
-        // Use 'i' for integer parameter type for application_id
+        
+        // Ensure $application_id is an integer
         $stmt->bind_param("iss", $application_id, $review, $status);
+        
+       
+        
 
         // Execute and check if successful
         if ($stmt->execute()) {

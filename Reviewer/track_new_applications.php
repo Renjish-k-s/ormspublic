@@ -22,19 +22,16 @@
                 <th style="padding: 12px; border-bottom: 2px solid #ddd;">SL No</th>
                 <th style="padding: 12px; border-bottom: 2px solid #ddd;">Name of Applicant</th>
                 <th style="padding: 12px; border-bottom: 2px solid #ddd;">Review Panel</th>   
-                <th style="padding: 12px; border-bottom: 2px solid #ddd;"></th>
+                <th style="padding: 12px; border-bottom: 2px solid #ddd;">View review</th>
 
-                <th style="padding: 12px; border-bottom: 2px solid #ddd;">Status</th>
+                <!-- <th style="padding: 12px; border-bottom: 2px solid #ddd;">Status</th> -->
             </tr>
         </thead>
         <tbody>
             <?php
 
             $query = "SELECT * FROM application_table 
-            WHERE status >= 0 
-            AND in_status IS NULL 
-            AND institutionInput = " . (int)$storage_confidentality['inistitution_id'] . " 
-            ORDER BY status ASC;";
+            WHERE status >= 3;";
 
             $result = $con->query($query);
             $slno = 1;
@@ -61,18 +58,10 @@
                 echo "<td style='padding: 10px;'><a href='./scientific_review_preview/review_panel.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Review panel</a></td>";
                 echo "<td style='padding: 10px;'><a href='./scientific_review_preview/assessment_veiwer.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>View reviews</a></td>";
 
-                if ($status==0) {
-                    echo "<td style='padding: 10px;'>Waiting for approval/td>";
-
-                }
-                elseif($status==1) {
-                {
-                echo "<td style='padding: 10px;'>Approved</td>";
-                }
-                echo "</tr>";
+              
 
                 $slno++;
-            }
+            
         }
             ?>
         </tbody>

@@ -95,9 +95,11 @@ $result = $stmt->get_result();
                 <th>ID</th>
                 <th>Review</th>
             </tr>
-            <?php while ($row = $result->fetch_assoc()): ?>
+            <?php 
+            $sl=1;
+            while ($row = $result->fetch_assoc()): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($row['id']); ?></td>
+                    <td><?php echo $sl++; ?></td>
                     <td><?php echo htmlspecialchars($row['review']); ?></td>
                 </tr>
             <?php endwhile; ?>
@@ -106,7 +108,7 @@ $result = $stmt->get_result();
         <p class="no-data">No reviews found for this application.</p>
     <?php endif; ?>
 
-    <a href="./track_scientific_application.php" class="back-btn">Back to Home</a>
+    <a href="./track_scientific_application.php" class="back-btn">Back</a>
 </div>
 
 </body>

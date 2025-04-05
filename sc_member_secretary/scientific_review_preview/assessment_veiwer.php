@@ -89,16 +89,39 @@ $result = $stmt->get_result();
 <div class="container">
     <h2>Reviews for Application ID: <?php echo htmlspecialchars($application_id); ?></h2>
 
-    <?php if ($result->num_rows > 0): ?>
+    <?php if ($result->num_rows > 0): 
+        $sl=1;
+        ?>
         <table>
             <tr>
                 <th>ID</th>
+                <th>Review Name</th>
                 <th>Review</th>
+                <th>Approval status</th>
+
             </tr>
-            <?php while ($row = $result->fetch_assoc()): ?>
+            <?php while ($row = $result->fetch_assoc()): 
+                $user_id=$row['reviewer_id'];
+                $user_query = "SELECT holder_name FROM user_table_global WHERE id = $user_id";
+                $user_result = $con->query($user_query);
+                $user_data = $user_result->fetch_assoc();
+                $applicant_name = $user_data['holder_name'];
+
+
+                ?>
+
                 <tr>
-                    <td><?php echo htmlspecialchars($row['id']); ?></td>
+                    <td><?php echo $sl++;?></td>
+                    <td><?php echo htmlspecialchars($applicant_name); ?></td>
+
                     <td><?php echo htmlspecialchars($row['review']); ?></td>
+                    <?php if ($row['status']==0): ?>
+<td>Not approved</td>
+                    <?php endif; ?>
+                    <?php if ($row['status']==1): ?>
+<td>Approved</td>
+                    <?php endif; ?>
+
                 </tr>
             <?php endwhile; ?>
         </table>

@@ -1,16 +1,10 @@
 <?php 
 session_start();
-?>
-<?php include '../Partials/header.php'; ?>
+include '../Partials_in/header.php';?>
 <?php
 if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
-$userid = $_SESSION['user_id'];
-$sql="SELECT id,applicant_id_ec,applicant_id_ec_co FROM application_table WHERE user_id='$userid'";
-$res=mysqli_query($con,$sql);
-
-
 ?>
 
 
@@ -33,29 +27,24 @@ $res=mysqli_query($con,$sql);
 
 <div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
     <div class="container">
-        <h2 class="text-center">Extension Application</h2>
+        <h2 class="text-center">Commitee Sheduler</h2>
         <form id="myform" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
         <div class="form-group">
-            <label for="fullName">Application ID</label>
-            <select class="form-control" id="appid"  name="appid" required>
-              <option value="" selected disabled>Select your application id</option>
-              <?php while($row=mysqli_fetch_array($res)) {?>
-              <option value="<?php echo $row['id']; ?>"><?php echo $row['applicant_id_ec'].'/'.$row['applicant_id_ec_co']; ?></option>
-              <?php } ?>
-            </select>
+            <label for="fullName">Date of commitee</label>
+            <input type="date" class="form-control" id="date_shedule" placeholder="Enter the date*" name="date_shedule" required>
           </div>
-
+       
 
           <div class="form-group">
-            <label for="fullName">Duration needed</label>
-            <input type="text" class="form-control" id="duration" placeholder="Enter the duration*" name="duration" required>
-          </div>
+            <label for="username">Review Type</label>
+          <select name="usertype" id="" class="form-control">
+            <option value="">Select Review Type</option>
+            <option value="0">Scientific commitee</option>
+            <option value="1">Ethics commitee</option>
 
-          <div class="form-group">
-            <label for="email_idemail_id">Describe the reason for extesion</label>
-            <textarea class="form-control" id="" cols="40" rows="10" name="description"></textarea>
+          </select> 
           </div>
 
          
@@ -87,7 +76,7 @@ $(document).ready(function(){
         submitButton.prop('disabled', true);
         submitButton.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
         $.ajax({
-            url: './db/extend.php', // PHP file to handle upload
+            url: './db/shedule.php', // PHP file to handle upload
             type: 'POST',
             data: formdata,
             contentType: false, // Important: Prevent jQuery from setting content type
@@ -101,9 +90,9 @@ $(document).ready(function(){
 
                 if (message === '1') {
 
-                  alertcustom("Application created Successfully", 1);
+                  alertcustom("Member created sucessfully", 1);
                  setTimeout(function() {
-                     window.location.href = "./";
+                     window.location.href = "./shedule_commitee.php";
                  }, 3000);
 
                 } else {

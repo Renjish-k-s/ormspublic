@@ -44,6 +44,7 @@ session_destroy(); // Destroy the session
                     <li class="nav-item">
                         <a class="nav-link" href="./login/complaint.php">Register complaint</a>
                     </li>
+                    
                 </ul>
             </div>
         </div>

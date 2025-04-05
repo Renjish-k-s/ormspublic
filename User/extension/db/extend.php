@@ -19,10 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $created_at = date('Y-m-d H:i:s'); // Timestamp for creation time
 
     // Database connection (Ensure `$conn` is correctly set up in config.php)
-    $stmt = $con->prepare("INSERT INTO extension_application (app_id,user_id,description, status, on_create) VALUES (?, ?, ?, ?,?)");
+    $stmt = $con->prepare("INSERT INTO extension_application (app_id,user_id,duration,description, status, on_create) VALUES (?, ?, ? , ?, ? , ?)");
     
     if ($stmt) {
-        $stmt->bind_param("sssis", $appid,$userid, $description, $status, $created_at); 
+        $stmt->bind_param("ssssis", $appid,$userid,$duration,$description,$status,$created_at); 
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {

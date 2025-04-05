@@ -83,11 +83,19 @@
                 elseif($status==4) 
                     {
                         echo "<td style='padding: 10px;'><a href='./Ethics_review_preview/?id=" . $row['id'] . "' style='color: blue; text-decoration: none;'>view application</a></td>";
-                        echo "<td style='padding: 10px;'>confirmed by the user</td>";                    }
+                        echo "<td style='padding: 10px;'>Under review</td>";                    }
+
+                elseif($status==5) 
+                        {
+                            echo "<td style='padding: 10px;'> <a href='../certificate/ethics-committee-letter.php' target='blank'>Approved sucessfully</a></td>";
+                        }
+                    
+
+
                 echo "</tr>";
 
             }
-        
+           
             ?>
         </tbody>
     </table>

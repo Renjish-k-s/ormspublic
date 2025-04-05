@@ -81,13 +81,15 @@
                 }
                 elseif($status>=1) 
                     {
-                    echo "<td style='padding: 10px;'>Approved sucessfully</td>";
+                    echo "<td style='padding: 10px;'> <a href='../certificate/scientific-committee-letter.php' target='blank'>Approved sucessfully</a></td>";
                     }
                 echo "</tr>";
 
             }
         
             ?>
+
+            <a href=""></a>
         </tbody>
     </table>
 </div>

@@ -170,7 +170,7 @@ Responsive adjustments for smaller screens
     <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header"></h6>
-            <a class="collapse-item" href="./track_new_applications.php">Scientific application</a>
+            <a class="collapse-item" href="./track_new_applications.php">Ethics application</a>
             <!-- <a class="collapse-item" href="" id="">Track application</a> -->
         </div>
     </div>

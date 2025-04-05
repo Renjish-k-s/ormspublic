@@ -155,8 +155,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"></h6>
-                        <a class="collapse-item" href="./post_member.php">Post a members</a>
-                        <a class="collapse-item" href="./commitee_sheduler.php">User Control</a>
+                        <a class="collapse-item" href="../scientific_rev/post_member.php">Post a members</a>
+                        <a class="collapse-item" href="../scientific_rev/create_comitee.php">User Control</a>
                     </div>
                 </div>
             </li>   
@@ -179,7 +179,21 @@
                     </div>
                 </div>
             </li>
-           
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities1"
+                    aria-expanded="true" aria-controls="collapseUtilities1">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Shedule Commitee</span>
+                </a>
+                <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header"></h6>
+                        <a class="collapse-item" href="../Ethics_rev/shedule_commitee.php">Shedule</a>
+
+                    </div>
+                </div>
+            </li>
 
         </ul>
         <!-- End of Sidebar -->

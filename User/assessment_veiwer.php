@@ -106,7 +106,7 @@ $result = $stmt->get_result();
         <p class="no-data">No reviews found for this application.</p>
     <?php endif; ?>
 
-    <a href="./track_scientific_application.php" class="back-btn">Back to Home</a>
+    <a href="./track_scientific_application.php" class="back-btn">Back</a>
 </div>
 
 </body>

@@ -1,4 +1,8 @@
-<?php include '../../database/config.php'; ?>
+<?php 
+
+session_start();
+
+include '../../database/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +28,14 @@ $stmt->execute();
 // Get result
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();  
+
+$userid = $_SESSION['user_id'];
+$sql1 = "SELECT vote_status FROM vote_table WHERE app_id = ? AND reviewer_id = ?";
+$stmt5 = $con->prepare($sql1);
+$stmt5->bind_param("ii", $id, $userid);
+$stmt5->execute();
+$result1 = $stmt5->get_result();
+
 
 $administrative_details = json_decode($row['administrative_details'], true);
 $research_related_info = json_decode($row['research_related_info'], true);
@@ -94,6 +106,31 @@ $waiver_reason = explode(",", $row['waiver_reason']);
                 <textarea class="form-control"  name="review_passage" id="" cols="30" rows="15"></textarea>
 
                 <button type="submit" name="submit_review" class="btn btn-primary" style="align:center">Submit review</button>
+<?php
+
+
+// Fetch the result
+if ($row1 = $result1->fetch_assoc()) {
+    // If a record exists, check vote_status
+    if ($row1['vote_status'] == 1) {
+        echo "<p class='text-success'>Approved already</p>";
+    } else {
+        echo "<p class='text-danger'>Disapproved already</p>";
+    }
+} else {
+    // No record exists, show Approve/Disapprove buttons
+    echo '
+        <a href="./approve.php?aid=' . $id . '&status=1" class="btn btn-warning">Approve</a>
+        <a href="./approve.php?aid=' . $id . '&status=0" class="btn btn-warning">Disapprove</a>
+    ';
+}
+$stmt5->close();
+?>
+
+
+                <!-- <a href="./approve.php?aid=<?php echo $id ?>&status=1" class="btn btn-warning">Approve</a>
+                <a href="./approve.php?aid=<?php echo $id ?>&status=0" class="btn btn-warning">Disapprove</a> -->
+
                 </div>
         </form>
             </div>
@@ -160,19 +197,19 @@ if (isset($_POST['submit_review'])) {
     
     $application_id = $_GET['id'] ?? 0; // Get ID from URL and ensure it's a valid integer
     $review = $_POST['review_passage'] ?? ''; // Get review text
-    $status = '0'; // Default status
-
+    $status = 0; // Default status
+    $userid = $_SESSION['user_id'];
     
 
     if (!empty($application_id) && !empty($review)) {
         // Prepare SQL statement
-        $stmt = $con->prepare("INSERT INTO scientific_revew_table (application_id, review, status, time,reviewer_id) VALUES (?, ?, ?, NOW(),?)");
+        $stmt = $con->prepare("INSERT INTO scientific_revew_table (application_id,reviewer_id, review, status,review_type,time) VALUES (?,?, ?, ?,1,NOW())");
         if (!$stmt) {
             die("Prepare failed: " . $con->error);
         }
 
         // Use 'i' for integer parameter type for application_id
-        $stmt->bind_param("isss", $application_id, $review, $status);
+        $stmt->bind_param("isss", $application_id,$userid,$review, $status);
 
         // Execute and check if successful
         if ($stmt->execute()) {
