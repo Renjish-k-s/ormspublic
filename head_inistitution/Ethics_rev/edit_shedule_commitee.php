@@ -24,7 +24,13 @@ if (!isset($_SESSION['csrf_token'])) {
       font-size: 0.875rem; /* Smaller button size */
     }
   </style>
+<?php
+$id=$_GET['id'];
+$sql_data="SELECT * FROM `commitee_table` WHERE id='$id'";
+$res_data=mysqli_query($con,$sql_data);
+$row_data=mysqli_fetch_array($res_data);
 
+?>
 <div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
     <div class="container">
         <h2 class="text-center">Edit Shedule</h2>
@@ -34,12 +40,12 @@ if (!isset($_SESSION['csrf_token'])) {
         <div class="form-group">
             <label for="fullName">Date of commitee</label>
             <?php $today = date('Y-m-d'); ?>
-            <input type="date" class="form-control" id="date_shedule" name="date_shedule" min="<?php echo $today; ?>" required>
+            <input type="date" class="form-control" id="date_shedule" name="date_shedule" value="<?php echo $row_data['date_meet']; ?>" min="<?php echo $today; ?>" required>
 
           </div>
        
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="username">Review Type</label>
           <select name="revtype" id="" class="form-control">
             <option value="">Select Review Type</option>
@@ -47,7 +53,7 @@ if (!isset($_SESSION['csrf_token'])) {
             <option value="1">Ethics commitee</option>
 
           </select> 
-          </div>
+          </div> -->
 
          
 
@@ -70,37 +76,24 @@ if (!isset($_SESSION['csrf_token'])) {
 
 if (isset($_POST['create_commitee'])) {
 
+
+  $id=$_GET['id'];
   // Get form data
   $date = $_POST['date_shedule'];  // Format: YYYY-MM-DD
-  $revtype = $_POST['revtype'];
 
-  // Extract year and month abbreviation
-  $year = date('Y', strtotime($date));
-  $mon = date('M', strtotime($date));
-
-  // Count existing records for the same year and type
-  $sql = "SELECT * FROM `commitee_table` WHERE year = '$year' AND type = '$revtype'";
-  $res = mysqli_query($con, $sql);
-  $num_row = mysqli_num_rows($res);
-
-  // Generate committee ID
-  if ($revtype == 1) {
-      $commitee_num = "IEC/MBDC/" . ($num_row + 1) . "/" . $mon . "/" . $year;
-  } else {
-      $commitee_num = "ISC/MBDC/" . ($num_row + 1) . "/" . $mon . "/" . $year;
-  }
 
   // Insert into the table
-  $sql_insert = "INSERT INTO `commitee_table` (`commitee_id`, `year`, `type`, `date_meet`, `status`) 
-                 VALUES ('$commitee_num', '$year', '$revtype', '$date', '0')";
+  $sql_insert = "UPDATE `commitee_table` SET `date_meet`='$date' WHERE id='$id'";
 
   if (mysqli_query($con, $sql_insert)) {
-      // Optional: redirect or success message
-      // header("Location: success.php");
+    
+    echo "<script>alert('Date updated')</script>";
+   // header("Location: ./ec_shedules.php");
   } else {
       echo "Error: " . mysqli_error($con);
   }
 }
+
 
 
 

@@ -156,6 +156,8 @@
                         <h6 class="collapse-header"></h6>
                         <a class="collapse-item" href="./scientific_rev/post_member.php">Post a members</a>
                         <a class="collapse-item" href="./scientific_rev/create_comitee.php">User Control</a>
+                        <a class="collapse-item" href="./Ethics_rev/sc_shedules.php">Shedule control</a>
+
                     </div>
                 </div>
             </li>   
@@ -173,6 +175,8 @@
                         <h6 class="collapse-header"></h6>
                         <a class="collapse-item" href="./Ethics_rev/post_member.php">Post a members</a>
                         <a class="collapse-item" href="./Ethics_rev/create_comitee.php">User Control</a>
+                        <a class="collapse-item" href="./Ethics_rev/ec_shedules.php">Shedule control</a>
+
 
                     </div>
                 </div>
