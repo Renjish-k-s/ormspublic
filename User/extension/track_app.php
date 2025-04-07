@@ -65,7 +65,7 @@ $result = $stmt->get_result();
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>{$sl_no}</td>";
-                echo "<td>{$row['app_id']}</td>";
+                echo "<td>IEC/{$row['id']}</td>";
                 echo "<td><a href='./view_application.php?id={$row['id']}'>View Application</a></td>";
                 echo "<td>" . ($row['status'] == 1 ? "Approved" : "Pending") . "</td>";
                 echo "<td><a href='./db/delete_app.php?id={$row['id']}'>Cancel Application</a></td>";

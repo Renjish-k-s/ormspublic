@@ -87,9 +87,11 @@ $result = $stmt->get_result();
 <body>
 
 <div class="container">
-    <h2>Reviews for Application ID: <?php echo htmlspecialchars($application_id); ?></h2>
+    <!-- <h2>Reviews for Application ID: <?php echo htmlspecialchars($application_id); ?></h2> -->
 
-    <?php if ($result->num_rows > 0): ?>
+    <?php if ($result->num_rows > 0):
+        $slno=0;
+        ?>
         <table>
             <tr>
                 <th>ID</th>
@@ -97,7 +99,7 @@ $result = $stmt->get_result();
             </tr>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($row['id']); ?></td>
+                    <td><?php echo ++$slno; ?></td>
                     <td><?php echo htmlspecialchars($row['review']); ?></td>
                 </tr>
             <?php endwhile; ?>

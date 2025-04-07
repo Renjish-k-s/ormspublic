@@ -105,7 +105,7 @@ $waiver_reason = explode(",", $row['waiver_reason']);
                    <!-- <input type="text" name="reviewername" id="" placeholder="Enter the revewer name"> -->
                 <textarea class="form-control"  name="review_passage" id="" cols="30" rows="15"></textarea>
 
-                <button type="submit" name="submit_review" class="btn btn-primary" style="align:center">Submit review</button>
+               
 <?php
 
 
@@ -120,8 +120,11 @@ if ($row1 = $result1->fetch_assoc()) {
 } else {
     // No record exists, show Approve/Disapprove buttons
     echo '
+     <button type="submit" name="submit_review" class="btn btn-primary" style="align:center">Submit review</button>
         <a href="./approve.php?aid=' . $id . '&status=1" class="btn btn-warning">Approve</a>
         <a href="./approve.php?aid=' . $id . '&status=0" class="btn btn-warning">Disapprove</a>
+        <a href="./chat.php?aid='.$id.'" class="btn btn-warning">Ask query</a>
+
     ';
 }
 $stmt5->close();

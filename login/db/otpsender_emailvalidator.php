@@ -150,7 +150,14 @@ if(isset($_POST['loginbutton']))
                                                         }, 500);
                                                     </script>";
                     exit;
-    
+                    case '3':
+
+                        echo "<script>
+                                        setTimeout(() => {
+                                        window.location.href = '../ec_member_secretary/'; // Change 'success.php' to your desired page
+                                                        }, 500);
+                                                    </script>";
+                    exit;
 
 
             }

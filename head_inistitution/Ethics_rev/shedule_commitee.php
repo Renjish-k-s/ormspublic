@@ -33,13 +33,15 @@ if (!isset($_SESSION['csrf_token'])) {
 
         <div class="form-group">
             <label for="fullName">Date of commitee</label>
-            <input type="date" class="form-control" id="date_shedule" placeholder="Enter the date*" name="date_shedule" required>
+            <?php $today = date('Y-m-d'); ?>
+            <input type="date" class="form-control" id="date_shedule" name="date_shedule" min="<?php echo $today; ?>" required>
+
           </div>
        
 
           <div class="form-group">
             <label for="username">Review Type</label>
-          <select name="usertype" id="" class="form-control">
+          <select name="revtype" id="" class="form-control">
             <option value="">Select Review Type</option>
             <option value="0">Scientific commitee</option>
             <option value="1">Ethics commitee</option>
@@ -52,7 +54,7 @@ if (!isset($_SESSION['csrf_token'])) {
         
           <div class="form-row">
             <div class="col-md-6">
-            <button type="submit" class="btn btn-primary btn-sm btn-block">Submit</button>
+            <button type="submit" class="btn btn-primary btn-sm btn-block" name="create_commitee">Submit</button>
             </div>
             <div class="col-md-6">
               <button type="reset" class="btn btn-secondary btn-sm btn-block">Reset</button>
@@ -64,51 +66,48 @@ if (!isset($_SESSION['csrf_token'])) {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-<script>
-$(document).ready(function(){
-    $('#myform').on('submit', function(event){
-        event.preventDefault(); // Prevent default form submission
+<?php
 
-        var formdata = new FormData(this); // Create FormData object
-        var submitButton = $(this).find('button[type="submit"]');
-        
-        // Disable the button and change text to show loading
-        submitButton.prop('disabled', true);
-        submitButton.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
-        $.ajax({
-            url: './db/shedule.php', // PHP file to handle upload
-            type: 'POST',
-            data: formdata,
-            contentType: false, // Important: Prevent jQuery from setting content type
-            processData: false, // Important: Prevent jQuery from processing data
-            dataType: 'json',   // Parse response as JSON
-            success: function(response) {
-                var message = response.message;
-                submitButton.prop('disabled', false);
-                submitButton.html('Submit');
-                $('#myform')[0].reset();
+if (isset($_POST['create_commitee'])) {
 
-                if (message === '1') {
+  // Get form data
+  $date = $_POST['date_shedule'];  // Format: YYYY-MM-DD
+  $revtype = $_POST['revtype'];
 
-                  alertcustom("Member created sucessfully", 1);
-                 setTimeout(function() {
-                     window.location.href = "./shedule_commitee.php";
-                 }, 3000);
+  // Extract year and month abbreviation
+  $year = date('Y', strtotime($date));
+  $mon = date('m', strtotime($date));
 
-                } else {
-                  alertcustom(message, 2);
-                    //alert("Error: " + message);  // Show error message if not '1'
-                }
-            },
-            error: function(xhr, status, error) {
-                submitButton.prop('disabled', false);
-                submitButton.html('Submit');
-                console.error('Error:', xhr.responseText);
-                alert('Error: ' + xhr.responseText);
-            }
+  // Count existing records for the same year and type
+  $sql = "SELECT * FROM `commitee_table` WHERE year = '$year' AND type = '$revtype'";
+  $res = mysqli_query($con, $sql);
+  $num_row = mysqli_num_rows($res);
+  $serial_number = sprintf('%02d', $num_row + 1);
 
-        });
-    });
-});
-</script>
-<script src="./alert.js"></script>
+  // Generate committee ID
+  if ($revtype == 1) {
+    $commitee_num = "IEC/MBDC/" . $serial_number . "/" . $mon . "/" . $year;
+  } else {
+    $commitee_num = "ISC/MBDC/" . $serial_number . "/" . $mon . "/" . $year;
+  }
+
+  // Insert into the table
+  $sql_insert = "INSERT INTO `commitee_table` (`commitee_id`, `year`, `type`, `date_meet`, `status`) 
+                 VALUES ('$commitee_num', '$year', '$revtype', '$date', '0')";
+
+  if (mysqli_query($con, $sql_insert)) {
+    
+    echo "<script>alert('inserted')</script>";
+      // header("Location: success.php");
+  } else {
+      echo "Error: " . mysqli_error($con);
+  }
+}
+
+
+
+
+
+?>
+<script></script>
+

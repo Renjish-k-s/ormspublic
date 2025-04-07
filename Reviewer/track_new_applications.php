@@ -20,7 +20,7 @@
         <thead style="background: linear-gradient(135deg, #2C3E50, #3498DB); color: white;">
             <tr>
                 <th style="padding: 12px; border-bottom: 2px solid #ddd;">SL No</th>
-                <th style="padding: 12px; border-bottom: 2px solid #ddd;">Name of Applicant</th>
+                <th style="padding: 12px; border-bottom: 2px solid #ddd;">Application ID</th>
                 <th style="padding: 12px; border-bottom: 2px solid #ddd;">Review Panel</th>   
                 <th style="padding: 12px; border-bottom: 2px solid #ddd;">View review</th>
 
@@ -31,7 +31,7 @@
             <?php
 
             $query = "SELECT * FROM application_table 
-            WHERE status >= 3;";
+            WHERE status >= 4;";
 
             $result = $con->query($query);
             $slno = 1;
@@ -54,7 +54,7 @@
 
                 echo "<tr style='border-bottom: 1px solid #ddd;'>";
                 echo "<td style='padding: 10px;'>$slno</td>";
-                echo "<td style='padding: 10px;'>$applicant_name</td>";
+                echo "<td style='padding: 10px;'>".$row['applicant_id_ec'].'/'.$row['applicant_id_ec_co']."</td>";
                 echo "<td style='padding: 10px;'><a href='./scientific_review_preview/review_panel.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Review panel</a></td>";
                 echo "<td style='padding: 10px;'><a href='./scientific_review_preview/assessment_veiwer.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>View reviews</a></td>";
 

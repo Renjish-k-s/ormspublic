@@ -13,11 +13,12 @@ if (empty($application_id)) {
 }
 
 // Fetch reviews from the database
-$query = "SELECT * FROM scientific_revew_table WHERE application_id = ?";
-$stmt = $con->prepare($query);
-$stmt->bind_param("s", $application_id);
-$stmt->execute();
-$result = $stmt->get_result();
+$sql="SELECT * FROM `user_table_global` WHERE usertype='4' AND status='1' ;";
+$res=mysqli_query($con,$sql);
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -87,34 +88,73 @@ $result = $stmt->get_result();
 <body>
 
 <div class="container">
-    <!-- <h2>Reviews for Application ID: <?php// echo htmlspecialchars($application_id); ?></h2> -->
+    <!-- <h2>Reviews for Application ID: <?php echo htmlspecialchars($application_id); ?></h2> -->
 
-    <?php if ($result->num_rows > 0): ?>
+    <?php 
+        $sl=0;
+        ?>
         <table>
             <tr>
                 <th>ID</th>
+                <th>Reviewer Name</th>
                 <th>Review</th>
+                <th>Chat box</th>
+                <th>Approval status</th>
+
             </tr>
-            <?php 
-            $sl=1;
-            while ($row = $result->fetch_assoc()): ?>
+            <?php while ($row = mysqli_fetch_array($res)): 
+              
+
+                ?>
+
                 <tr>
-                    <td><?php echo $sl++; ?></td>
-                    <td><?php echo htmlspecialchars($row['review']); ?></td>
+                    <td><?php echo ++$sl;?></td>
+                    <td><?php echo "Reviewer".$sl ?></td>
+
+                    <td><a href="./view_reviews.php?id=<?php echo $row['id']; ?>&appid=<?php echo $application_id ;?>">view reviews</a></td>
+                    <?php                     
+                     $user_id= $row['id'];    
+                    ?>
+                    <td><a href="./chat.php?aid=<?php echo $application_id ; ?>&revid=<?php echo $user_id ;?>">view chats</a></td>
+
+                    <?php
+                    $user_id= $row['id'];
+                    $sql_vote="SELECT * FROM vote_table WHERE app_id='$application_id' AND reviewer_id='$user_id';";
+                    $res_vote=mysqli_query($con,$sql_vote);
+                    $count=mysqli_num_rows($res);
+                    if($count==1)
+                    {
+$row=mysqli_fetch_array($res_vote);
+                    
+                    ?>
+                    <td><?php
+                    if($row['vote_status']==1)
+                    {
+                        echo "Approved";
+                    }
+                    else
+                    {
+                        echo "Disapproved";
+                    }
+                    ?></td>
+<?php
+                    }
+                    else
+                    {
+                        ?>
+<td>Not responded</td>
+                        <?php
+                    }
+?>
                 </tr>
             <?php endwhile; ?>
         </table>
-    <?php else: ?>
-        <p class="no-data">No reviews found for this application.</p>
-    <?php endif; ?>
+   
 
-    <a href="./track_scientific_application.php" class="back-btn">Back</a>
+    <a href="./track_initial_application.php" class="back-btn">Back to Home</a>
 </div>
 
 </body>
 </html>
 
-<?php
-$stmt->close();
-$con->close();
-?>
+
