@@ -26,6 +26,7 @@
                 <th style="padding: 12px; border-bottom: 2px solid #ddd;">Status</th>
                 <th style="padding: 12px; border-bottom: 2px solid #ddd;"></th>
 
+
             </tr>
         </thead>
         <tbody>
@@ -88,6 +89,19 @@
                 elseif($status==5) 
                         {
                             echo "<td style='padding: 10px;'> <a href='../certificate/ethics-committee-letter.php' target='blank'>Approved sucessfully</a></td>";
+                        }
+                        elseif($status==6) 
+                        {
+                            echo "<td style='padding: 10px;'><a href='./Ethics_review_preview/?id=" . $row['id'] . "' style='color: blue; text-decoration: none;'>view application</a></td>";
+                            echo "<td style='padding: 10px;'>Allocated for continous review</td>";
+                        }
+                        elseif($status==7) 
+                        {
+                            echo "<td style='padding: 10px;'>Under continous review</td>";
+                        }
+                        elseif($status==8) 
+                        {
+                            echo "<td style='padding: 10px;'>Continous review Approved</td>";
                         }
                     
 

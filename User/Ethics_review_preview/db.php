@@ -206,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     
 
-$status=4;
+$status=3;
 $applicationid_formatted=$_POST['applicationid_formatted'];
 $applicationid_count=$_POST['applicationid_count'];
 

@@ -102,6 +102,7 @@ $c=$row_c['total']+1;
             <input type="hidden" name="applicationid" value="<?php echo $_GET['id'];?>">
             <input type="hidden" name="applicationid_formatted" value="<?php echo $row['commitee_id'];?>">
             <input type="hidden" name="applicationid_count" value="<?php echo $c;?>">
+            <?php include './continous.php'; ?>
 
             <?php include './ethical_details.php'; ?>
             <?php include './adminitrative_details.php'; ?>
@@ -112,9 +113,21 @@ $c=$row_c['total']+1;
             <?php include './compenstion_patment.php'; ?>
             <?php include './storage_confidentality.php'; ?>
             <?php include './documents.php'; ?>
-            <?php if ($status=='3') { ?>
+            <?php if ($status=='2') { ?>
             <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <?php     } ?>
+
+            <?php if ($status=='6') { ?>
+            <div class="d-flex justify-content-center">
+                    <a href="./contin.php?id=<?php echo $id; ?>"  class="btn btn-primary">Submit for continous review</a>
+            </div>
+            <?php     } ?>
+
+            <?php if ($status=='10') { ?>
+            <div class="d-flex justify-content-center">
+            <a href="./contin_ec.php?id=<?php echo $id; ?>"  class="btn btn-primary">Submit for final review</a>
             </div>
             <?php     } ?>
 

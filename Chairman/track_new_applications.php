@@ -74,6 +74,21 @@
                 echo "<td style='padding: 10px;'>Approved to proceed</td>";
 
                 }
+                elseif($status==6) 
+                {
+                echo "<td style='padding: 10px;'>Fixed for continous review</td>";
+              
+                }
+                elseif($status==7) 
+                {
+                echo "<td style='padding: 10px;'>Under review</td>";
+                echo "<td style='padding: 10px;'><a href='./scientific_review_preview/approve_con.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Approve to start</a></td>";
+                }
+                elseif($status==8) 
+                {
+                echo "<td style='padding: 10px;'>Approved to proceed</td>";
+              
+                }
                 echo "</tr>";
 
                 $slno++;

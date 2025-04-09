@@ -74,6 +74,7 @@ $waiver_reason = explode(",", $row['waiver_reason']);
                     <h4><i class="fas fa-file-alt me-2"></i>Application Details</h4>
                 </div>
                 <div class="panel-content">
+                <?php include './continous.php'; ?>
 
                 <?php include './adminitrative_details.php'; ?>
                 <?php include './research_related_info.php'; ?>

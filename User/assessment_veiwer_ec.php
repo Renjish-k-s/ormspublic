@@ -118,34 +118,34 @@ $res=mysqli_query($con,$sql);
                     <td><a href="./chat.php?aid=<?php echo $application_id ; ?>&revid=<?php echo $user_id ;?>">view chats</a></td>
 
                     <?php
-                    $user_id= $row['id'];
-                    $sql_vote="SELECT * FROM vote_table WHERE app_id='$application_id' AND reviewer_id='$user_id';";
-                    $res_vote=mysqli_query($con,$sql_vote);
-                    $count=mysqli_num_rows($res);
-                    if($count==1)
-                    {
-$row=mysqli_fetch_array($res_vote);
-                    
-                    ?>
-                    <td><?php
-                    if($row['vote_status']==1)
-                    {
-                        echo "Approved";
-                    }
-                    else
-                    {
-                        echo "Disapproved";
-                    }
-                    ?></td>
-<?php
-                    }
-                    else
-                    {
-                        ?>
-<td>Not responded</td>
-                        <?php
-                    }
+$user_id = $row['id'];
+$sql_vote = "SELECT * FROM vote_table WHERE app_id='$application_id' AND reviewer_id='$user_id';";
+$res_vote = mysqli_query($con, $sql_vote);
+$count = mysqli_num_rows($res_vote);
+
+if ($count == 1) {
+    $vote_row = mysqli_fetch_array($res_vote);
+
+    if ($vote_row && isset($vote_row['vote_status'])) {
+        ?>
+        <td>
+            <?php
+            if ($vote_row['vote_status'] == 1) {
+                echo "Approved";
+            } else {
+                echo "Disapproved";
+            }
+            ?>
+        </td>
+        <?php
+    } else {
+        echo "<td>Error fetching vote status</td>";
+    }
+} else {
+    echo "<td>Not responded</td>";
+}
 ?>
+
                 </tr>
             <?php endwhile; ?>
         </table>

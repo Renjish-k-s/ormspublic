@@ -25,6 +25,8 @@
                 <th style="padding: 12px; border-bottom: 2px solid #ddd;"></th>
 
                 <th style="padding: 12px; border-bottom: 2px solid #ddd;">Status</th>
+                <th style="padding: 12px; border-bottom: 2px solid #ddd;"></th>
+
             </tr>
         </thead>
         <tbody>
@@ -62,14 +64,35 @@
                     echo "<td style='padding: 10px;'><a href='./scientific_review_preview/approve.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Approve for review</a></td>";
 
                 }
-                elseif($status==4) {
+                elseif($status==4) 
                 {
                 echo "<td style='padding: 10px;'>Under reviewing</td>";
                 }
+                elseif($status==5) 
+                {
+                echo "<td style='padding: 10px;'>Approved to proceed</td>";
+                echo "<td style='padding: 10px;'><a href='risk.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Risk analysis</a></td>";
+                }
+                elseif($status==6) 
+                {
+                echo "<td style='padding: 10px;'>Fixed for continous review</td>";
+              
+                }
+                elseif($status==7) 
+                {
+                echo "<td style='padding: 10px;'>Under review</td>";
+              
+                }
+                elseif($status==8) 
+                {
+                echo "<td style='padding: 10px;'>Approved to proceed</td>";
+                echo "<td style='padding: 10px;'><a href='risk.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Risk analysis</a></td>";
+                }
+                
                 echo "</tr>";
 
                 $slno++;
-            }
+            
         }
             ?>
         </tbody>
