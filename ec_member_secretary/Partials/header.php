@@ -1,4 +1,7 @@
-<?php include '../../database/config.php'; ?>
+<?php 
+ session_start();
+
+include '../../database/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -170,41 +173,20 @@ $user = $result->fetch_assoc(); // Fetch data as an associative array
             </div>
 
 
-            <!-- Nav Item - Pages Collapse Menu -->
- <?php if($user['status']=='1'){ ?>
-
             <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1"
         aria-expanded="true" aria-controls="collapseTwo1">
         <i class="fas fa-fw fa-cog"></i>
-        <span>Scientific commiteee</span>
+        <span>Application tracker</span>
     </a>
     <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header"></h6>
-            <a class="collapse-item" href="../scientific_review/">Create application</a>
-            <a class="collapse-item" href="" id="">Track application</a>
+            <a class="collapse-item" href="../track_new_applications.php">List application</a>
+            <!-- <a class="collapse-item" href="" id="">Track application</a> -->
         </div>
     </div>
 </li>
-
-<!-- Ethics Committee Dropdown -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Ethics commiteee</span>
-    </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header"></h6>
-            <a class="collapse-item" href="../initial_review">Create application</a>
-            <a class="collapse-item" href="../track_initial_application.php">Track application</a>
-        </div>
-    </div>
-</li>
-
-<?php }?>
 
        
 

@@ -1,4 +1,7 @@
-<?php include '../Partials_in/header.php';?>
+<?php
+session_start();
+
+include '../Partials_in/header.php';?>
 
 <style>
     a {

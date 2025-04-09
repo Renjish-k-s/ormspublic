@@ -116,6 +116,32 @@
     }
 }
 </style>
+
+<?php
+$userid = $_SESSION['user_id']; // Get user ID from session
+
+// Prepare the SQL statement
+$sql = "SELECT * FROM user_table_global WHERE id = ?";
+$stmt = $con->prepare($sql);
+
+// Bind parameters
+$stmt->bind_param("i", $userid); // "i" indicates an integer
+
+// Execute the query
+$stmt->execute();
+
+// Get the result
+$result = $stmt->get_result();
+
+// Fetch user data
+$user = $result->fetch_assoc(); // Fetch data as an associative array
+
+// Redirect if status is not 1
+// print($user['status']);
+
+
+
+?>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -300,16 +326,16 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php //echo $row_holdername['holder_name'];  ?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $user['holder_name'];  ?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="./update_user.php">
+                                <a class="dropdown-item" href="">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Update Profile
+                                    forgot password
                                 </a>
                                 
                                 <div class="dropdown-divider"></div>

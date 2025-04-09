@@ -316,7 +316,12 @@ Responsive adjustments for smaller screens
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Update Profile
                                 </a>
-                                
+                                <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item" href="./forgot_password.php">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Change password
+                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

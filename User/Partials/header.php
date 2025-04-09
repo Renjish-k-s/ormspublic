@@ -1,4 +1,6 @@
-<?php include '../../database/config.php'; ?>
+<?php 
+// session_start();
+include '../../database/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -116,6 +118,8 @@ Responsive adjustments for smaller screens
     }
 }
 </style>
+
+
 <?php
 $userid = $_SESSION['user_id']; // Get user ID from session
 
@@ -303,7 +307,10 @@ $user = $result->fetch_assoc(); // Fetch data as an associative array
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Update Profile
                                 </a>
-                                
+                                <a class="dropdown-item" href="../forgot_password.php">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Change password
+                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../../">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

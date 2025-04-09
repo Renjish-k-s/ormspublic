@@ -1,27 +1,7 @@
-<?php include '../database/config.php'; 
-session_start();  // Start session at the top
-if($_SESSION['id']==-1)
-{
-    header("Location: error.php");
-    exit(); 
-}
+<?php 
+ session_start();
 
-
-$sql_name = "SELECT * FROM `user_table_global` WHERE id = ?";
-// Prepare the SQL statement
-$stmt = $con->prepare($sql_name);
-// Bind the parameter (assuming id is an integer)
-$id=$_SESSION['id']; // Replace this with the actual id you want to query
-$stmt->bind_param("i", $id); // "i" indicates that the bound parameter is an integer
-// Execute the statement
-$stmt->execute();
-// Fetch the result
-$result = $stmt->get_result();
-$row_holdername = $result->fetch_assoc();
-$stmt->close();
-
-
-?>
+include '../../database/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,17 +13,135 @@ $stmt->close();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>User-Applicant</title>
+    <title>Admin Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="./css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     
 
 </head>
+<style>
+    /* Wrapper for entire page */
+#wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Fixed sidebar styles */
+#accordionSidebar {
+    position: fixed;
+    height: 100vh;
+    width: 225px; /* Adjust based on your design */
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+/* Content wrapper adjustments */
+#content-wrapper {
+    margin-left: 225px; /* Match sidebar width */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Fixed navbar styles */
+.topbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 225px; /* Match sidebar width */
+    height: 70px; /* Adjust based on your navbar height */
+    z-index: 1000;
+}
+
+/* Main content area */
+#content {
+    margin-top: 70px; /* Match navbar height */
+    flex: 1;
+    position: relative;
+}
+
+/* Scrollable content area */
+#contentchange {
+    padding: 1.5rem;
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 70px - 80px); /* Viewport height minus navbar and footer */
+    overflow-y: auto;
+}
+
+/* Fixed footer */
+.sticky-footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 225px; /* Match sidebar width */
+    z-index: 1000;
+    background: white;
+}
+
+/* Ensure content doesn't get hidden behind footer */
+#content {
+    padding-bottom: 80px; /* Match footer height */
+}
+
+Responsive adjustments for smaller screens
+@media (max-width: 768px) {
+    #accordionSidebar {
+        width: 0;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    #content-wrapper {
+        margin-left: 0;
+    }
+
+    .topbar {
+        left: 0;
+    }
+
+    .sticky-footer {
+        left: 0;
+    }
+
+    /* When sidebar is toggled */
+    .sidebar-toggled #accordionSidebar {
+        width: 225px;
+        transform: translateX(0);
+    }
+}
+</style>
+<?php
+$userid = $_SESSION['user_id']; // Get user ID from session
+
+
+// Prepare the SQL statement
+$sql = "SELECT * FROM user_table_global WHERE id = ?";
+$stmt = $con->prepare($sql);
+
+// Bind parameters
+$stmt->bind_param("i", $userid); // "i" indicates an integer
+
+// Execute the query
+$stmt->execute();
+
+// Get the result
+$result = $stmt->get_result();
+
+// Fetch user data
+$user = $result->fetch_assoc(); // Fetch data as an associative array
+
+// Redirect if status is not 1
+// print($user['status']);
+?>
 
 <body id="page-top">
 
@@ -51,7 +149,7 @@ $stmt->close();
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"style="    background: linear-gradient(135deg, #2C3E50, #3498DB);">
 
             <!-- Sidebar - Brand -->
          
@@ -61,7 +159,7 @@ $stmt->close();
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="./">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -71,42 +169,26 @@ $stmt->close();
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Proposals
+                Dashboard controller
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Requests</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Requests</h6>
-                        <a class="collapse-item" href="new_request.php">New Requests</a>
-                        <a class="collapse-item" href="request_on_process.php">Request on process</a>
-                        <a class="collapse-item" href="">Request history</a>
-                    </div>
-                </div>
-            </li>   
 
-            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>History</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Proposal History</h6>
-                        <a class="collapse-item" href="show_proposal.php">Resent Proposal</a>
-                        <a class="collapse-item" href="">Old proposals</a>
-                    </div>
-                </div>
-            </li>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1"
+        aria-expanded="true" aria-controls="collapseTwo1">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Application tracker</span>
+    </a>
+    <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header"></h6>
+            <a class="collapse-item" href="../track_new_applications.php">List application</a>
+            <!-- <a class="collapse-item" href="" id="">Track application</a> -->
+        </div>
+    </div>
+</li>
+
+       
 
          
             <!-- Sidebar Message -->
@@ -163,46 +245,7 @@ $stmt->close();
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
+                          
                         </li>
 
                         <!-- Nav Item - Messages -->
@@ -213,22 +256,20 @@ $stmt->close();
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $row_holdername['holder_name'];  ?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Test User</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <?php if ($row_holdername['holder_name']==0){?>
-                                <a class="dropdown-item" href="../proposal/update_user.php">
+                                <a class="dropdown-item" href="../update_user">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Update Profile
                                 </a>
-                                <?php }?>
                                 
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../">
+                                <a class="dropdown-item" href="../../">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -245,7 +286,7 @@ $stmt->close();
 
 
             <!-- End of Main Content -->
-            <script src="./vendor/jquery/jquery.min.js"></script>
-    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   
