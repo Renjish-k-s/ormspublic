@@ -268,9 +268,9 @@ Responsive adjustments for smaller screens
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="./update_user">
+                                <a class="dropdown-item" href="./forgot_password.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Update Profile
+                                        Change password
                                 </a>
                                 
                                 <div class="dropdown-divider"></div>

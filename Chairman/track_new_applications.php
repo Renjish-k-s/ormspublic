@@ -60,19 +60,24 @@
                 echo "<td style='padding: 10px;'><a href='./scientific_review_preview/assessment_veiwer.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>View reviews</a></td>";
 
                 if ($status==3) {
-                    echo "<td style='padding: 10px;'><a href='./scientific_review_preview/approve.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Approve for review</a></td>";
+                    echo "<td style='padding: 10px;'><a href='./scientific_review_preview/approve.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Approved for review</a></td>";
 
                 }
-                elseif($status==4) {
+                elseif($status==4) 
                 {
                 echo "<td style='padding: 10px;'>Under reviewing</td>";
                 echo "<td style='padding: 10px;'><a href='./scientific_review_preview/approve.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Approve to start</a></td>";
 
                 }
+                elseif($status==5) 
+                {
+                echo "<td style='padding: 10px;'>Approved to proceed</td>";
+
+                }
                 echo "</tr>";
 
                 $slno++;
-            }
+            
         }
             ?>
         </tbody>

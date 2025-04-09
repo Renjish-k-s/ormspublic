@@ -65,7 +65,7 @@
                     echo "<td style='padding: 10px;'><a href='./scientific_review_preview/approve.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Approve</a></td>";
 
                 }
-                elseif($status==1) {
+                elseif($status>=1) {
                 {
                 echo "<td style='padding: 10px;'>Approved</td>";
                 }

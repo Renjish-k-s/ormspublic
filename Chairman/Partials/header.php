@@ -182,8 +182,8 @@ $user = $result->fetch_assoc(); // Fetch data as an associative array
     <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header"></h6>
-            <a class="collapse-item" href="../track_new_applications.php">List application</a>
-            <!-- <a class="collapse-item" href="" id="">Track application</a> -->
+            <a class="collapse-item" href="../track_new_applications.php">Ethics applications</a>
+            <a class="collapse-item" href="../track_app.php">Extension requests</a>
         </div>
     </div>
 </li>
@@ -263,9 +263,9 @@ $user = $result->fetch_assoc(); // Fetch data as an associative array
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="../update_user">
+                                <a class="dropdown-item" href="../forgot_password.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Update Profile
+                                        Change password
                                 </a>
                                 
                                 <div class="dropdown-divider"></div>
