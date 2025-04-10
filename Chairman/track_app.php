@@ -66,7 +66,7 @@ $result = $stmt->get_result();
                 echo "<td>{$sl_no}</td>";
                 echo "<td>IEC/{$row['id']}</td>";
                 echo "<td><a href='./view_application.php?id={$row['id']}'>View Application</a></td>";
-                echo "<td><a href='./view_application.php?id={$row['id']}'>Approve</a></td>";
+                echo "<td><a href='./approve.php?id={$row['id']}'>Approve</a></td>";
                 echo "</tr>";
                 $sl_no++;
             }

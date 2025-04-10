@@ -43,7 +43,7 @@ if (!isset($_SESSION['csrf_token'])) {
           <select name="revtype" id="" class="form-control">
             <option value="">Select Review Type</option>
             <option value="6">Continous Review</option>
-            <option value="9">Final review</option>
+            <option value="10">Final review</option>
 
           </select> 
           </div>

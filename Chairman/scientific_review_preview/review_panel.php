@@ -94,6 +94,10 @@ $waiver_reason = explode(",", $row['waiver_reason']);
                 <textarea class="form-control"  name="review_passage" id="" cols="30" rows="15"></textarea>
 
                 <button type="submit" name="submit_review" class="btn btn-primary" style="align:center">Submit review</button>
+
+                    <a href="./approve_cancel.php?id=<?php echo $id; ?>" class="btn btn-warning" style="align:center">Cancel Research</a>
+
+
                 </div>
         </form>
             </div>

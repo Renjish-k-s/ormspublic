@@ -103,8 +103,28 @@
                         {
                             echo "<td style='padding: 10px;'>Continous review Approved</td>";
                         }
+                        elseif($status==10) 
+                        {
+                            echo "<td style='padding: 10px;'><a href='./Ethics_review_preview/?id=" . $row['id'] . "' style='color: blue; text-decoration: none;'>view application</a></td>";
+                            echo "<td style='padding: 10px;'>Allocated for Final review</td>";
+                        }
+                        elseif($status==11) 
+                        {
+                            echo "<td style='padding: 10px;'>Under Final review</td>";
+                        }
+                        elseif($status==12) 
+                        {
+                            echo "<td style='padding: 10px;'> <a href='../certificate/ethics-committee-letter.php' target='blank'>Approved sucessfully</a></td>";                    
+                        
+                        }
+                        elseif($status==100) 
+                        {
+                            echo "<td style='padding: 10px; color: red; font-weight: bold;'>Research cancelled</td>";
+          
+                        
+                        }
                     
-
+                        
 
                 echo "</tr>";
 

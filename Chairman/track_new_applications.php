@@ -56,9 +56,11 @@
                 echo "<tr style='border-bottom: 1px solid #ddd;'>";
                 echo "<td style='padding: 10px;'>$slno</td>";
                 echo "<td style='padding: 10px;'>$applicant_name</td>";
+                if ($status!=100) {
                 echo "<td style='padding: 10px;'><a href='./scientific_review_preview/review_panel.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Review panel</a></td>";
                 echo "<td style='padding: 10px;'><a href='./scientific_review_preview/assessment_veiwer.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>View reviews</a></td>";
-
+                }
+                
                 if ($status==3) {
                     echo "<td style='padding: 10px;'><a href='./scientific_review_preview/approve.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Approved for review</a></td>";
 
@@ -87,6 +89,26 @@
                 elseif($status==8) 
                 {
                 echo "<td style='padding: 10px;'>Approved to proceed</td>";
+              
+                }
+                elseif($status==10) 
+                {
+                echo "<td style='padding: 10px;'>Fixed for final review</td>";
+              
+                }
+                elseif($status==11) 
+                {
+                echo "<td style='padding: 10px;'>Under review</td>";
+                echo "<td style='padding: 10px;'><a href='./scientific_review_preview/approve_fin.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Approve to Final review</a></td>";
+                }
+                elseif($status==12) 
+                {
+                echo "<td style='padding: 10px;'>Approved successfully</td>";
+              
+                }
+                elseif($status==100) 
+                {
+                    echo "<td style='padding: 10px; color: red; font-weight: bold;'>Research cancelled</td>";
               
                 }
                 echo "</tr>";

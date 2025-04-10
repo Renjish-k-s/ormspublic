@@ -88,6 +88,21 @@
                 echo "<td style='padding: 10px;'>Approved to proceed</td>";
                 echo "<td style='padding: 10px;'><a href='risk.php?id=" . $row['id'] . "' style='color: blue; text-decoration: underline;'>Risk analysis</a></td>";
                 }
+                elseif($status==10) 
+                {
+                echo "<td style='padding: 10px;'>Fixed for Final review</td>";
+              
+                }
+                elseif($status==11) 
+                {
+                echo "<td style='padding: 10px;'>Under review</td>";
+              
+                }
+                elseif($status==12) 
+                {
+                echo "<td style='padding: 10px;'>Approved</td>";
+              
+                }
                 
                 echo "</tr>";
 
